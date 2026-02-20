@@ -1,0 +1,6 @@
+# This project uses only Python standard library
+# No external packages required!
+
+# Optional for development:
+# cryptography    # for comparing with real encryption
+# pytest          # for running tests
