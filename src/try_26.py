@@ -148,11 +148,11 @@ class ASA_Crypt:
         mac_key = self.create_mac_key(state)
         
         early_nonce = nonce
-        nonce = self.process_nonce(nonce, salt)
 
         for byte in plaintext:
             if counter == self.block_size:
                 block_counter += 1
+                nonce = self.process_nonce(nonce, salt)
                 keystream = self.create_keystream(state, nonce, block_counter)
                 counter = 0
             
@@ -346,17 +346,18 @@ class ASA_Crypt:
         valid &= hmac.compare_digest(self.header, header2)
         valid &= hmac.compare_digest(expected_tag, tag)
         
-        if self.cuckoo_enabled:
-            valid &= not self.check_tag(tag)
-        
         if not valid:
             return
+    
+        if self.cuckoo_enabled:
+            if not self.check_tag(tag) :
+                return
         
-        nonce = self.process_nonce(nonce, salt)
         
         for byte in ciphertext:
             if counter == self.block_size:
                 block_counter += 1
+                nonce = self.process_nonce(nonce, salt)
                 keystream = self.create_keystream(state, nonce, block_counter)
                 counter = 0
             
