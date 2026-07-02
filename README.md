@@ -1,3 +1,5 @@
+**Copyright © 2026 Amirsam Azmoodeh. All Rights Reserved.**
+
 # 🚀 Crypto-Journey-From-Zero-to-Something-Cool
 
 > **A 26-Step Educational Journey from Basic XOR to Cuckoo Filters**
